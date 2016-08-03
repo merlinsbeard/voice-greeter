@@ -11,18 +11,23 @@ from get_url_news8 import news
 print(subprocess.call('echo starting speak', shell=True))
 
 from gtts import gTTS
+from weather import Weather
 
 count = 1
 
 # your name goes here:
-name = 'Joyce! '
-
+name = 'Joyce '
+area = 'Perth'
 # end
 end = 'Thats all for now.  Have a nice day and enjoy your music  '
 
 # Turn all of the parts into a single string
 
-wad = (gmt + name + day + wtr + frc + news + end)
+# Weather
+w = Weather(area)
+weather = w.weather_condition() + w.weather_low_high()
+
+wad = (gmt + name + day + weather + news + end)
 
 # strip any quotation marks
 wad = wad.replace('"', '').strip()
