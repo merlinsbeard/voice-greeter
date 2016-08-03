@@ -5,9 +5,8 @@ import time
 import textwrap
 from better_spoken_time3 import gmt, day
 
-
-from get_url_weather9 import wtr, frc
 from get_url_news8 import news
+print(day)
 print(subprocess.call('echo starting speak', shell=True))
 
 from gtts import gTTS
