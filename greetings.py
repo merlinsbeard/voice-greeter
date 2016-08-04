@@ -51,18 +51,25 @@ class Morning:
 def main():
 
     parser = argparse.ArgumentParser()
+
     parser.add_argument("name", type=str,
-                        help="Display name")
+                        help="Your Name")
     parser.add_argument("area", type=str,
-                        help="Display name")
-    parser.add_argument("-v","--verbose", action="store_true",
-                        help="Display name")
+                        help="Area where you live")
+    parser.add_argument("-n","--news", action="store_true",
+                        help="")
+
     args = parser.parse_args()
     name = args.name
     area = args.area
     print(day)
     w = Weather(area)
-    morning = Morning(gmt, name, day, area, w.weather_combine())
+
+    if args.news:
+        morning = Morning(gmt, name, day, area, w.weather_combine(), news=news())
+    else:
+        morning = Morning(gmt, name, day, area, w.weather_combine())
+
     print(subprocess.call('echo Creating MP3 ...', shell=True))
     morning.create_mp3(morning.create_greeting())
     print(morning.greeting)
