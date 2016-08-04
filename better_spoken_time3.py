@@ -21,11 +21,11 @@ now = time.strftime("%A %B ") + suffixed + ',' + time.strftime(" %I %M %p")
 
 
 if int(time.strftime("%H")) < 12:
-  period = ' morning '
+  period = ' morning today is a new day embrace it with open arms'
 if int(time.strftime("%H")) >= 12:
-  period = ' afternoon '
+  period = ' afternoon half a day left to go'
 if int(time.strftime("%H")) >= 17:
-  period = ' evening '
+  period = ' evening I hope you had a pleasant day its now time for relaxing'
 
 #print time.strftime("%H")
 #print period

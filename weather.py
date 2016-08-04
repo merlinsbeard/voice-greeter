@@ -55,3 +55,6 @@ class Weather():
 
         weather = " with a low of {} and a high of {}.  ".format(todays_low, todays_high)
         return weather
+
+    def weather_combine(self):
+        return self.weather_condition() + self.weather_low_high()

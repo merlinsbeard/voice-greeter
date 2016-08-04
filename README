@@ -8,7 +8,11 @@ Installation
  `$ virtualenv -p /usr/bin/python3 venv`
 
 2. Install requirements
- 
+
  `$ pip install -r requirements.txt`
 
-3. Run python script
+3. Run Script
+
+  `$ python greetings.py <name> <area>`
+
+4. Output Sound File is inside the Sound Folder
