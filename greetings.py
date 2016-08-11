@@ -70,7 +70,6 @@ def main():
     print(day)
     w = Weather(area)
 
-
     news = ""
     if args.news:
         news = news()
@@ -78,11 +77,7 @@ def main():
 
     if args.category:
         a = vars(args)
-        print("HOLA")
         quote_of_day = give_quote(a['category'])
-        print(quote_of_day)
-
-        #quote_of_day = give_quote()
     else:
         quote_of_day = give_quote()
 
