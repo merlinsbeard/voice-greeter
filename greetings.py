@@ -10,12 +10,13 @@ from better_spoken_time3 import gmt, day
 from gtts import gTTS
 from weather import Weather
 from get_url_news8 import news
+from quote import give_quote
 
 
 
 class Morning:
 
-    def __init__(self,openner, name, today, area, weather,news=''):
+    def __init__(self,openner, name, today, area, weather,quote_of_day, news=''):
         self.openner = openner
         self.name = name
         self.area = area
@@ -24,9 +25,13 @@ class Morning:
         self.weather = weather
         self.end = 'Thats all for now.  Have a nice day and enjoy your music  '
         self.greeting = ''
+        self.quote_of_day = quote_of_day
 
     def create_greeting(self):
-        greet = self.openner + self.name + self.today + self.weather + self.news + self.end
+        greet = self.openner + self.name + \
+                self.today + self.weather + \
+                self.news + self.quote_of_day + self.end
+
         greet = greet.replace('""', '').strip()
         greet = greet.replace("'", '').strip()
         self.greeting = greet
@@ -49,14 +54,14 @@ class Morning:
         self.create_mp3(self.create_greeting(), "t1.mp3")
 
 def main():
-
     parser = argparse.ArgumentParser()
-
     parser.add_argument("name", type=str,
                         help="Your Name")
     parser.add_argument("area", type=str,
                         help="Area where you live")
     parser.add_argument("-n","--news", action="store_true",
+                        help="")
+    parser.add_argument("-c","--category", action="store",
                         help="")
 
     args = parser.parse_args()
@@ -65,10 +70,26 @@ def main():
     print(day)
     w = Weather(area)
 
+
+    news = ""
     if args.news:
-        morning = Morning(gmt, name, day, area, w.weather_combine(), news=news())
+        news = news()
+
+
+    if args.category:
+        a = vars(args)
+        print("HOLA")
+        quote_of_day = give_quote(a['category'])
+        print(quote_of_day)
+
+        #quote_of_day = give_quote()
     else:
-        morning = Morning(gmt, name, day, area, w.weather_combine())
+        quote_of_day = give_quote()
+
+
+    quote_of_day = "Todays quote of the day. {} by {}. ".format(quote_of_day['quote'], quote_of_day['author'])
+
+    morning = Morning(gmt, name, day, area, w.weather_combine(), quote_of_day,news)
 
     print(subprocess.call('echo Creating MP3 ...', shell=True))
     morning.create_mp3(morning.create_greeting())

@@ -1,18 +1,6 @@
-==========
-Creates a mp3 file that contains Greetings, Weather, and News
-============
+How to use
 
-Installation
-1. Create Virtualenv
+$ pip install -r requirements.txt
+$ python greetings.py -c <category> <name> <area> --news (optional)
 
- `$ virtualenv -p /usr/bin/python3 venv`
-
-2. Install requirements
-
- `$ pip install -r requirements.txt`
-
-3. Run Script
-
-  `$ python greetings.py <name> <area>`
-
-4. Output Sound File is inside the Sound Folder
+It will save the mp3 file inside Sounds Folder
