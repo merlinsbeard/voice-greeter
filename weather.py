@@ -29,7 +29,8 @@ class Weather():
         current_high = weather_dict['main']['temp_max']
         conditions = weather_dict['weather'][0]['description']
         location = weather_dict['name']
-        current = str(current).replace(".", " point ")
+        current = round(current)
+        #current = str(current).replace(".", " point ")
         weather = "Weather conditions for {} today are {} with a current temperature of {}" \
                     .format(self.area, conditions, current)
         return weather
@@ -47,8 +48,8 @@ class Weather():
         todays_high = weather_dict['list'][0]['main']['temp_max']
 
 
-        todays_low = str(round(todays_low,1))
-        todays_high = str(round(todays_high,1))
+        todays_low = str(round(todays_low))
+        todays_high = str(round(todays_high))
 
         todays_low = todays_low.replace(".", " point ")
         todays_high = todays_high.replace(".", " point ")

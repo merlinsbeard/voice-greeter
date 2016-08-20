@@ -61,8 +61,9 @@ def main():
                         help="Area where you live")
     parser.add_argument("-n","--news", action="store_true",
                         help="")
+    cat_help = 'love, inspiring, art, funny, sports, life, management'
     parser.add_argument("-c","--category", action="store",
-                        help="")
+                        help=cat_help)
 
     args = parser.parse_args()
     name = args.name
@@ -78,9 +79,9 @@ def main():
     if args.category:
         a = vars(args)
         quote_of_day = give_quote(a['category'])
+
     else:
         quote_of_day = give_quote()
-
 
     quote_of_day = "Todays quote of the day. {} by {}. ".format(quote_of_day['quote'], quote_of_day['author'])
 
