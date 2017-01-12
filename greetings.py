@@ -16,12 +16,12 @@ from quote import give_quote
 
 class Morning:
 
-    def __init__(self, openner, name, today,
-                 area, weather, quote_of_day, news=''):
-        self.openner = openner
+    def __init__(self, name, area, weather, quote_of_day,
+                 openner=gmt, today=day, news=''):
+        self.openner = gmt
         self.name = name
         self.area = area
-        self.today = today
+        self.today = day
         self.news = news
         self.weather = weather
         self.end = 'Thats all for now.  Have a nice day and enjoy your music  '
@@ -89,7 +89,7 @@ def main():
     quote_of_day = "Todays quote of the day. {} by {}. ".format(
                         quote_of_day['quote'], quote_of_day['author'])
 
-    morning = Morning(gmt, name, day,
+    morning = Morning(name,
                       area, w.weather_combine(), quote_of_day, news)
 
     print(subprocess.call('echo Creating MP3 ...', shell=True))
