@@ -3,7 +3,8 @@
 import subprocess
 import time
 import textwrap
-import sys, getopt
+import sys
+import getopt
 import argparse
 from os import listdir, makedirs
 from better_spoken_time3 import gmt, day
@@ -13,10 +14,10 @@ from get_url_news8 import news
 from quote import give_quote
 
 
-
 class Morning:
 
-    def __init__(self,openner, name, today, area, weather,quote_of_day, news=''):
+    def __init__(self, openner, name, today,
+                 area, weather, quote_of_day, news=''):
         self.openner = openner
         self.name = name
         self.area = area
@@ -45,7 +46,9 @@ class Morning:
             pages = 0
         count = pages + 1
         tts = gTTS(text=greeting, lang="en")
-        tts.save("Sounds/{}.mp3".format(count))
+        date_string = time.strftime("%Y-%m-%d-%H%M")
+        save_file = "greeting-{}-{}".format(count, date_string)
+        tts.save("Sounds/{}.mp3".format(save_file))
 
     def create_filename():
         pass
@@ -53,16 +56,17 @@ class Morning:
     def output(self):
         self.create_mp3(self.create_greeting(), "t1.mp3")
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("name", type=str,
                         help="Your Name")
     parser.add_argument("area", type=str,
                         help="Area where you live")
-    parser.add_argument("-n","--news", action="store_true",
+    parser.add_argument("-n", "--news", action="store_true",
                         help="")
     cat_help = 'love, inspiring, art, funny, sports, life, management'
-    parser.add_argument("-c","--category", action="store",
+    parser.add_argument("-c", "--category", action="store",
                         help=cat_help)
 
     args = parser.parse_args()
@@ -75,7 +79,6 @@ def main():
     if args.news:
         news = news()
 
-
     if args.category:
         a = vars(args)
         quote_of_day = give_quote(a['category'])
@@ -83,9 +86,11 @@ def main():
     else:
         quote_of_day = give_quote()
 
-    quote_of_day = "Todays quote of the day. {} by {}. ".format(quote_of_day['quote'], quote_of_day['author'])
+    quote_of_day = "Todays quote of the day. {} by {}. ".format(
+                        quote_of_day['quote'], quote_of_day['author'])
 
-    morning = Morning(gmt, name, day, area, w.weather_combine(), quote_of_day,news)
+    morning = Morning(gmt, name, day,
+                      area, w.weather_combine(), quote_of_day, news)
 
     print(subprocess.call('echo Creating MP3 ...', shell=True))
     morning.create_mp3(morning.create_greeting())

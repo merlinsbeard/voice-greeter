@@ -1,6 +1,7 @@
 import requests
 from quote_crawl import save_quotes
 
+
 def give_quote(category="love"):
     quotes = save_quotes()
     return quotes['categories'][category]

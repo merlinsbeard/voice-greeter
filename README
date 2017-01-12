@@ -1,4 +1,6 @@
 How to use
+Categories:
+love, inspiring, art, funny, life, and management
 
 $ pip install -r requirements.txt
 $ python greetings.py -c <category> <name> <area> --news (optional)

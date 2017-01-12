@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 import json
 from datetime import date
 
+
 def check_date(year_month_day):
     """
     Checks if the date is the same as today
     """
     j_now = year_month_day.split('-')
-    y,m,d = int(j_now[0]) ,int(j_now[1]), int(j_now[2])
-    j_now = date(y,m,d)
+    y, m, d = int(j_now[0]), int(j_now[1]), int(j_now[2])
+    j_now = date(y, m, d)
     now = date.today()
     if j_now == now:
         return True
@@ -22,7 +23,8 @@ def quotes():
     url = requests.get(url)
 
     soup = BeautifulSoup(url.text, 'html.parser')
-    cats = ['love', 'inspiring','art', 'funny', 'sports', 'life', 'management']
+    cats = ('love', 'inspiring', 'art',
+            'funny', 'sports', 'life', 'management')
     j = {}
     for q in soup.find_all('div', attrs={'class': 'carousel-caption'}):
         data = q.find_all('span')
@@ -33,11 +35,11 @@ def quotes():
                 category = c
         quote = data[0].string
         author = data[1].string
-        #print('Category: {}'.format(category.title()))
-        #print('Quote: {}'.format(quote.title()))
-        #print('Author: {}'.format(author.title()))
-        #print('==================')
-        #j[category] = [quote, author]
+        # print('Category: {}'.format(category.title()))
+        # print('Quote: {}'.format(quote.title()))
+        # print('Author: {}'.format(author.title()))
+        # print('==================')
+        # j[category] = [quote, author]
         j[category] = {
                         "quote": quote,
                         "author": author
@@ -50,7 +52,8 @@ def write_json():
     today = date.today()
     print(today)
     today = "{}-{}-{}".format(today.year, today.month, today.day)
-    return {"date":today, "categories": quotes()}
+    return {"date": today, "categories": quotes()}
+
 
 def save_quotes(filename='categories.json'):
     """
