@@ -75,9 +75,10 @@ def main():
     print(day)
     w = Weather(area)
 
-    news = ""
     if args.news:
-        news = news()
+        n2 = news()
+    else:
+        n2 = ''
 
     if args.category:
         a = vars(args)
@@ -90,7 +91,7 @@ def main():
                         quote_of_day['quote'], quote_of_day['author'])
 
     morning = Morning(name,
-                      area, w.weather_combine(), quote_of_day, news)
+                      area, w.weather_combine(), quote_of_day, news=n2)
 
     print(subprocess.call('echo Creating MP3 ...', shell=True))
     morning.create_mp3(morning.create_greeting())
