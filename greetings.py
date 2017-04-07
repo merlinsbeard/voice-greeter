@@ -50,8 +50,9 @@ class Morning:
         save_file = "greeting-{}-{}".format(count, date_string)
         tts.save("Sounds/{}.mp3".format(save_file))
 
-    def create_filename():
-        pass
+    def sound_file_path(self):
+        sound_path = 'Sounds/'
+        return sound_path
 
     def output(self):
         self.create_mp3(self.create_greeting(), "t1.mp3")
