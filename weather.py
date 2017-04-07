@@ -64,4 +64,4 @@ class Weather():
         return weather
 
     def weather_combine(self):
-        return self.weather_condition() + self.weather_low_high()
+        return self.weather_condition()
